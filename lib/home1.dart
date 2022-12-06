@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'button.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
 // import 'package:fluttertoast/fluttertoast_web.dart';
 
@@ -33,6 +34,7 @@ List<int> dangchum_Count=[0,0,0,0,0,0];
 List<String> dangchum_Soonbun=[' ',' ',' ',' ',' ',' '];
 var conHeight=45.0;  //숫자한개 컨테이너 높이
 var conWidth=40.0; //숫자한개 컨테이너 넓이
+var conbgColor='white';
 
 double disWidthSize=420; //화면 사이즈
 double sizeboxWidth=16;
@@ -326,6 +328,7 @@ class _Home1State extends State<Home1> {
                             ii=6;
 
                             setState(() {
+                              resultSangtae=0;
 
                             });
 
@@ -365,6 +368,7 @@ class _Home1State extends State<Home1> {
 
                               resultBunho.clear();
                               resultSangtae=0;
+                              lottoToast('초기화 완료');
                             });
 
                           },
@@ -752,6 +756,7 @@ class _Home1State extends State<Home1> {
                           setState(() {
                             // const CircularProgressIndicator();
                             // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("조회가 완료되었습니다.")));
+                            lottoToast('조회가 완료되었습니다.');
 
                           });
 
@@ -762,24 +767,8 @@ class _Home1State extends State<Home1> {
 
                         },
                         child:
-                        Container(
-                          width: disWidthSize,
-                          height: conHeight,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25.0),
-                              border: Border.all(
-                                  color: Colors.black,
-                                  style: BorderStyle.solid,
-                                  width: 2
-                              )
-                          ),
-                          alignment: Alignment.center,
-                          child:
-                          FittedBox(
-                            child: Text('그동안 당첨내역 조회하기 (번호 3개 이상 선택)', style: TextStyle(fontFamily: 'sandolout', fontSize: font_Size, fontWeight: FontWeight.bold,  color: Colors.deepOrange),),
-                          ),
+                        buttonCheck1(resultSangtae),  // 버튼1 '그동안 당첨내역 조회하기 (번호 3개 이상 선택)'
 
-                        ),
                       ),
 
                       SizedBox(height: 15,),
@@ -1040,32 +1029,17 @@ class _Home1State extends State<Home1> {
 
                               //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("번호를 1개 이상 5개 이하로 선택해주세요.")));
                             }
-                            else
-                              resultSangtae=2;
+                            else {
+                              resultSangtae = 2;
+                              lottoToast('조회가 완료되었습니다.');
+                            }
 
                           });
 
                         },
                         child:
-                        Container(
-                          width: disWidthSize,
-                          height: conHeight,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25.0),
-                              border: Border.all(
-                                  color: Colors.black,
-                                  style: BorderStyle.solid,
-                                  width: 2
-                              )
-                          ),
-                          alignment: Alignment.center,
-                          child:
-                          FittedBox(
-                            child: Text('함께 출현한 번호 조회 (번호 5개 이하 선택)', style: TextStyle(fontFamily: 'sandolout', fontSize: font_Size, fontWeight: FontWeight.bold,  color: Colors.blueAccent),),
-                          ),
+                        buttonCheck2(resultSangtae),  // 버튼2 '함께 출현한 번호 조회
 
-
-                        ),
                       ),
 
                       SizedBox(height: 15,),
@@ -1094,30 +1068,14 @@ class _Home1State extends State<Home1> {
                           setState(() {
 
                             resultSangtae=3;
+                            lottoToast('조회가 완료되었습니다.');
 
                           });
 
                         },
                         child:
-                        Container(
-                          width: disWidthSize,
-                          height: conHeight,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25.0),
-                              border: Border.all(
-                                  color: Colors.black,
-                                  style: BorderStyle.solid,
-                                  width: 2
-                              )
-                          ),
-                          alignment: Alignment.center,
-                          child:
-                          FittedBox(
-                            child: Text('그동안 출현한 번호별 통계', style: TextStyle(fontFamily: 'sandolout', fontSize: font_Size, fontWeight: FontWeight.bold,  color: Colors.deepPurple),),
-                          ),
+                        buttonCheck3(resultSangtae),  // 버튼3 '그동안 출현한 번호별 통계
 
-
-                        ),
                       ),
 
                       SizedBox(height: 15,),
@@ -1201,34 +1159,18 @@ class _Home1State extends State<Home1> {
                           setState(() {
 
                             resultSangtae=4;
+                            lottoToast('조회가 완료되었습니다.');
 
                           });
 
                         },
                         child:
-                        Container(
-                          width: disWidthSize,
-                          height: conHeight,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25.0),
-                              border: Border.all(
-                                  color: Colors.black,
-                                  style: BorderStyle.solid,
-                                  width: 2
-                              )
-                          ),
-                          alignment: Alignment.center,
-                          child:
-                          FittedBox(
-                            child: Text('최종회차 당첨 번호 이후 출현한 번호 통계', style: TextStyle(fontFamily: 'sandolout', fontSize: font_Size, fontWeight: FontWeight.bold,  color: Colors.green),),
-                          ),
-
-                        ),
+                        buttonCheck4(resultSangtae),  // 버튼4 '최종회차 당첨 번호 이후 출현한 번호 통계 버튼 처리
                       ),
 
                       SizedBox(height: 15,),
                       FittedBox(
-                        child: Text('※ 모든 통계는 보너스번호를 제외한 통계입니다.', style: TextStyle(fontFamily: 'sandol', fontSize: font_Size, fontWeight: FontWeight.bold,  color: Colors.redAccent),),
+                        child: Text('※ 모든 통계는 보너스번호를 제외한 통계입니다.', style: TextStyle(fontFamily: 'sandol', fontSize: font_Size, fontWeight: FontWeight.bold,  color: Colors.deepOrange),),
                       )
 
                     ],
@@ -1477,11 +1419,11 @@ class _Home1State extends State<Home1> {
     });
   }
 
-  resultScreen(int screen) {
+  resultScreen(int screen) {   //결과값표시화면
 
-    if(screen > 0) {
-      lottoToast('조회가 완료되었습니다.');
-    }
+
+
+
 
     switch(screen) {
       case 0 : {
@@ -3148,6 +3090,8 @@ void lottoToast(String jmt_message) {
 
   );
 } //토스트메시지 띄우기
+
+
 
 // void showToast(String message) {
 //   Fluttertoast.showToast(
