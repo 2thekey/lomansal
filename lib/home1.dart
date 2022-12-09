@@ -741,6 +741,7 @@ class _Home1State extends State<Home1> {
                               dang=0;
                             }  //for i
                             resultSangtae=1;
+                            lottoToast('조회가 완료되었습니다.');
                           }   //if-else 번호가 3개이상 선택시
 
                           //print('5등:'+dangchum5[0].toString()+',   4등:'+dangchum4[0].toString()+',   3등:'+dangchum3[0].toString()+
@@ -756,7 +757,7 @@ class _Home1State extends State<Home1> {
                           setState(() {
                             // const CircularProgressIndicator();
                             // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("조회가 완료되었습니다.")));
-                            lottoToast('조회가 완료되었습니다.');
+
 
                           });
 
