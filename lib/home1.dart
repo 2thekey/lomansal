@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:lomansal/main.dart';
 import 'button.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
 // import 'package:fluttertoast/fluttertoast_web.dart';
@@ -369,6 +370,7 @@ class _Home1State extends State<Home1> {
                               resultBunho.clear();
                               resultSangtae=0;
                               lottoToast('초기화 완료');
+
                             });
 
                           },
@@ -741,7 +743,11 @@ class _Home1State extends State<Home1> {
                               dang=0;
                             }  //for i
                             resultSangtae=1;
-                            lottoToast('조회가 완료되었습니다.');
+
+
+                            heart_count();
+                            lottoToast('조회 완료 ♥ x '+heartCount.toString());
+
                           }   //if-else 번호가 3개이상 선택시
 
                           //print('5등:'+dangchum5[0].toString()+',   4등:'+dangchum4[0].toString()+',   3등:'+dangchum3[0].toString()+
@@ -1032,7 +1038,10 @@ class _Home1State extends State<Home1> {
                             }
                             else {
                               resultSangtae = 2;
-                              lottoToast('조회가 완료되었습니다.');
+
+
+                              heart_count();
+                              lottoToast('조회 완료 ♥ x '+heartCount.toString());
                             }
 
                           });
@@ -1069,7 +1078,7 @@ class _Home1State extends State<Home1> {
                           setState(() {
 
                             resultSangtae=3;
-                            lottoToast('조회가 완료되었습니다.');
+                            lottoToast('조회 완료');
 
                           });
 
@@ -1160,7 +1169,9 @@ class _Home1State extends State<Home1> {
                           setState(() {
 
                             resultSangtae=4;
-                            lottoToast('조회가 완료되었습니다.');
+
+                            heart_count();
+                            lottoToast('조회 완료 ♥ x '+heartCount.toString());
 
                           });
 
@@ -3092,7 +3103,14 @@ void lottoToast(String jmt_message) {
   );
 } //토스트메시지 띄우기
 
+void heart_count(){
 
+  heartCount--;
+  if (heartCount==-1)
+    heartCount=0;
+
+  print(heartCount.toString());
+}
 
 // void showToast(String message) {
 //   Fluttertoast.showToast(

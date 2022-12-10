@@ -18,6 +18,8 @@ import 'landingpage.dart';
 //   runApp(MyApp());
 // }
 
+int heartCount=10;
+
 void main()  {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);  //화면세로고정

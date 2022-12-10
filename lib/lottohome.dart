@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:lomansal/main.dart';
 
 import 'home1.dart';
 import 'home2.dart';
 import 'home3.dart';
 import 'home4.dart';
-
 
 
 
@@ -56,10 +56,10 @@ class _LottoHomeState extends State<LottoHome> {
   Widget build(BuildContext context) {
 
 
-
     return Scaffold(
 
       appBar: AppBar(
+
         //centerTitle: true,
         title: const Text.rich(
           TextSpan(
@@ -95,30 +95,32 @@ class _LottoHomeState extends State<LottoHome> {
 
         //Text('로또만이 살 길이다!!!', style: TextStyle(fontFamily: 'sandolout',fontSize: 40,fontWeight: FontWeight.bold, color: Colors.black), ),
         actions: <Widget>[
-          for(var ijk=1; ijk<3; ijk++)
-          Row(
-            children: [
-              Icon(Icons.favorite,color: Colors.deepOrange,),
-
-            ],
-          ),
-          for(var ijk=1; ijk<4; ijk++)
-            Row(
-              children: [
-                Icon(Icons.favorite_border,color: Colors.grey,),
-
-              ],
-            ),
-
-
-          // IconButton(
-          //   icon: Icon(Icons.info_outline, color: Colors.red),
-          //   onPressed: () {
+          // for(var ijk=1; ijk <= heartCount; ijk++)
+          // Row(
+          //   children: [
+          //     Icon(Icons.favorite,color: Colors.deepOrange,),
           //
-          //     //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("snack")));
-          //
-          //   },
+          //   ],
           // ),
+          //
+          // if(heartCount<5)
+          // for(var ijk=1; ijk <= (5-heartCount); ijk++)
+          //   Row(
+          //     children: [
+          //       Icon(Icons.favorite_border,color: Colors.grey,),
+          //
+          //     ],
+          //   ),
+
+
+          IconButton(
+            icon: Icon(Icons.info_outline, color: Colors.red),
+            onPressed: () {
+
+              //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("snack")));
+
+            },
+          ),
         ],
 
         centerTitle: true,
