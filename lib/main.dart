@@ -18,7 +18,7 @@ import 'landingpage.dart';
 //   runApp(MyApp());
 // }
 
-int heartCount=10;
+
 
 void main()  {
   WidgetsFlutterBinding.ensureInitialized();

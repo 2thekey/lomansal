@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home1.dart';
+import 'lottovar.dart';
 
 
 buttonCheck1(int rSangtae)
