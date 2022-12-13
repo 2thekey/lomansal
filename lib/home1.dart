@@ -38,7 +38,7 @@ class _Home1State extends State<Home1> {
 
 
     disWidthSize=MediaQuery.of(context).size.width - 10; //화면 사이즈
-    sizeboxWidth=disWidthSize*0.03; //숫자사이 간격
+    sizeboxWidth=disWidthSize*0.03; //숫자사이 간격 조정
 
     conHeight=disWidthSize*0.1;  //숫자한개 컨테이너 높이
     conWidth=disWidthSize*0.1; //숫자한개 컨테이너 넓이
