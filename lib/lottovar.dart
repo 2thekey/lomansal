@@ -21,7 +21,7 @@ List<MyScore> resultBunho=[];
 var tonggyeCount=List<int>.filled(46, 0);
 
 var num=List.generate(2000,(i) => List.filled(8, 0, growable: true), growable:true);
-int last_soonbun=1045;
+int last_soonbun=0;
 //int last_soonbun=6;
 List<int> dangchum_Count=[0,0,0,0,0,0];
 List<String> dangchum_Soonbun=[' ',' ',' ',' ',' ',' '];

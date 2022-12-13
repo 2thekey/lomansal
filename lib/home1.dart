@@ -24,11 +24,14 @@ class _Home1State extends State<Home1> {
 
   @override
 
-
+  void initState(){
+    myget();
+    super.initState();
+  }
 
 
   Widget build(BuildContext context) {
-    myget();
+
 
 
 
@@ -1817,6 +1820,7 @@ class _Home1State extends State<Home1> {
       } //case 3 그동안 출현한 번호별 통계 출력
 
       case 4 : {
+        print('ddd='+last_soonbun.toString());
 
 
         return Center( //결과값 표시 존
@@ -1837,6 +1841,8 @@ class _Home1State extends State<Home1> {
               children: [
 
                 SizedBox(height: 15,),
+
+
 
                 FittedBox(
                   child: Text((last_soonbun-1).toString()+'회 1등 번호  '+
@@ -1988,7 +1994,9 @@ class _Home1State extends State<Home1> {
 
 void myget() async {
 
-  var num2 = [
+  var num2= new List.empty(growable: true);
+
+   num2 = [
     0,0,0,0,0,0,0,0,
     1,10,23,29,33,37,40,16,
     2,9,13,21,25,32,42,2,
@@ -3037,14 +3045,9 @@ void myget() async {
   ];
 
 
+   last_soonbun=num2[(num2.length)-8]+1;
+   //print(last_soonbun);
 
-  int ij=0;
-  for (int i = 0; i < last_soonbun; i++) {
-    for (int j = 0; j < 8; j++) {
-      num[i][j]=num2[ij];
-      ij++;
-    }
-  }
 
   int last_http=last_soonbun;
 
@@ -3056,24 +3059,41 @@ void myget() async {
 
     if (data['drwNo'] != null) {
 
-      num[iii][0]=data['drwNo'];
-      num[iii][1]=data['drwtNo1'];
-      num[iii][2]=data['drwtNo2'];
-      num[iii][3]=data['drwtNo3'];
-      num[iii][4]=data['drwtNo4'];
-      num[iii][5]=data['drwtNo5'];
-      num[iii][6]=data['drwtNo6'];
-      num[iii][7]=data['bnusNo'];
+      num2.add(data['drwNo']);
+      num2.add(data['drwtNo1']);
+      num2.add(data['drwtNo2']);
+      num2.add(data['drwtNo3']);
+      num2.add(data['drwtNo4']);
+      num2.add(data['drwtNo5']);
+      num2.add(data['drwtNo6']);
+      num2.add(data['bnusNo']);
 
-
-      //print(num[iii][0]);
-
+      // num[iii][0]=data['drwNo'];
+      // num[iii][1]=data['drwtNo1'];
+      // num[iii][2]=data['drwtNo2'];
+      // num[iii][3]=data['drwtNo3'];
+      // num[iii][4]=data['drwtNo4'];
+      // num[iii][5]=data['drwtNo5'];
+      // num[iii][6]=data['drwtNo6'];
+      // num[iii][7]=data['bnusNo'];
     }
     else {
       last_soonbun=iii;
+
       break;
     }
   }
+
+
+  int ij=0;
+  for (int ikk = 0; ikk < last_soonbun; ikk++) {
+    for (int jkk = 0; jkk < 8; jkk++) {
+      num[ikk][jkk]=num2[ij];
+      ij++;
+    }
+  }
+
+  print('fff'+last_soonbun.toString());
 
 
 
@@ -3102,7 +3122,7 @@ void heart_count(){
   if (heartCount==-1)
     heartCount=0;
 
-  print(heartCount.toString());
+  //print(heartCount.toString());
 }
 
 // void showToast(String message) {
