@@ -74,7 +74,7 @@ class _Home3State extends State<Home3> {
                 SizedBox(height: 15,),
 
 
-                InkWell(  //
+                InkWell(  //버튼
                   onTap: (){
 
 
