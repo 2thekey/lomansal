@@ -51,7 +51,7 @@ class _Home3State extends State<Home3> {
                             )
                         ),
                         alignment: Alignment.center,
-                        child: Text('꿈 과   로 또', style: TextStyle(fontFamily: 'sandolout', fontSize: font_Size*1.3, fontWeight: FontWeight.bold,  color: Colors.black),),
+                        child: Text('꿈 과  로 또', style: TextStyle(fontFamily: 'sandolout', fontSize: font_Size*1.3, fontWeight: FontWeight.bold,  color: Colors.black),),
                       ),
                     ),
 
