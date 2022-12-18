@@ -1,3 +1,4 @@
+import 'home3.dart';
 import 'lottohome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,6 +6,8 @@ import 'package:get/get.dart';
 import 'lottovar.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'landingpage.dart';
 
@@ -21,11 +24,27 @@ import 'landingpage.dart';
 //   runApp(MyApp());
 // }
 
+var hiveBox;
 
 
-void main()  {
+
+void main()  async{
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);  //화면세로고정
+  MobileAds.instance.initialize(); //에드몹초기화
+  await Hive.initFlutter();
+  hiveBox = await Hive.openBox('settings');
+  //print(hiveBox.get('Hconnect'));
+  if(hiveBox.get('heart')==null){
+    hiveBox.put('heart', 10);
+    heartCount=10;
+    print('최초접속');
+  }
+  else{
+    heartCount=hiveBox.get('heart');
+    print('기존접속');
+    }
+
   runApp(MyApp());
 }
 
@@ -43,6 +62,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+
     myget();
     super.initState();
     //_controller = TextEditingController();
@@ -50,7 +70,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void dispose() {
-    //_controller.dispose();
+    searchController.dispose();
     super.dispose();
   }
 

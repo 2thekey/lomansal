@@ -2,10 +2,57 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:lomansal/main.dart';
+
 import 'button.dart';
 import 'lottovar.dart';
 
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+
+InterstitialAd? _interstitialAd;   //에드몹 전면광고 테스트 시작
+
+void _createInterstitialAd() {
+  InterstitialAd.load(
+      adUnitId: InterstitialAd.testAdUnitId,
+      request: AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (InterstitialAd ad) {
+          print('$ad loaded');
+          _interstitialAd = ad;
+
+        },
+        onAdFailedToLoad: (LoadAdError error) {
+          print('InterstitialAd failed to load: $error.');
+
+          _interstitialAd = null;
+
+        },
+      ));
+}
+
+void _showInterstitialAd() {
+  if (_interstitialAd == null) {
+    print('Warning: attempt to show interstitial before loaded.');
+    return;
+  }
+  _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+    onAdShowedFullScreenContent: (InterstitialAd ad) =>
+        print('ad onAdShowedFullScreenContent.'),
+    onAdDismissedFullScreenContent: (InterstitialAd ad) {
+      print('$ad onAdDismissedFullScreenContent.');
+      ad.dispose();
+      _createInterstitialAd();
+    },
+    onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+      print('$ad onAdFailedToShowFullScreenContent: $error');
+      ad.dispose();
+      _createInterstitialAd();
+    },
+  );
+  _interstitialAd!.show();
+  _interstitialAd = null;
+}                          //에드몹 전면광고 테스트 종료
 
 
 
@@ -25,6 +72,11 @@ class _Home1State extends State<Home1> {
   @override
 
 
+  void initState(){
+    MobileAds.instance.initialize(); //에드몹초기화
+    _createInterstitialAd();
+    super.initState();
+  }
 
 
   Widget build(BuildContext context) {
@@ -285,6 +337,7 @@ class _Home1State extends State<Home1> {
 
                             setState(() {
                               resultSangtae=0;
+                              _showInterstitialAd();  //에드몹 전면광고테스트
 
                             });
 
@@ -1137,7 +1190,7 @@ class _Home1State extends State<Home1> {
 
                       SizedBox(height: 15,),
                       FittedBox(
-                        child: Text('※ 모든 통계는 보너스번호를 제외한 통계입니다.', style: TextStyle(fontFamily: 'sandol', fontSize: font_Size, fontWeight: FontWeight.bold,  color: Colors.deepOrange),),
+                        child: Text('※ 모든 통계는 보너스번호를 제외한 통계입니다.\n     오직 1등이 목표니까요.', style: TextStyle(fontFamily: 'sandol', fontSize: font_Size, fontWeight: FontWeight.bold,  color: Colors.deepOrange),),
                       )
 
                     ],
@@ -1817,7 +1870,7 @@ class _Home1State extends State<Home1> {
       } //case 3 그동안 출현한 번호별 통계 출력
 
       case 4 : {
-        print('ddd='+last_soonbun.toString());
+        //print('ddd='+last_soonbun.toString());
 
 
         return Center( //결과값 표시 존
@@ -1991,25 +2044,20 @@ class _Home1State extends State<Home1> {
 
 
 
-void lottoToast(String jmt_message) {
-  Fluttertoast.showToast(msg: jmt_message,
-    gravity: ToastGravity.CENTER,
-    backgroundColor: Colors.black,
-    fontSize: 20.0,
-    textColor: Colors.white,
-    timeInSecForIosWeb: 1,
-    toastLength: Toast.LENGTH_SHORT,
 
-  );
-} //토스트메시지 띄우기
 
 void heart_count(){
 
   heartCount--;
-  if (heartCount==-1)
-    heartCount=0;
+  if (heartCount==-1) {
+    heartCount = 0;
+    lottoToast('하트충전이 필요합니다.');
+  }
 
-  //print(heartCount.toString());
+  else {
+    hiveBox.put('heart', heartCount);
+    print(heartCount.toString());
+  }
 }
 
 // void showToast(String message) {

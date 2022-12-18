@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'lottovar.dart';
 
 
-
+final searchController = TextEditingController();
+var searchTxt='';
+var searchResult='';
 
 class Home3 extends StatefulWidget {
   const Home3({Key? key}) : super(key: key);
@@ -66,10 +68,19 @@ class _Home3State extends State<Home3> {
                             height: 40,
                             child: TextField(
                               textAlign: TextAlign.center,
+                                maxLength: 5,
+                                controller: searchController,
+
                                 decoration: InputDecoration(
 
                                   border: OutlineInputBorder(),
-                                  hintText: '검  색',
+                                  labelText: '검색',
+                                    hintText: '(5글자이내)',
+                                    // label:  const Center(
+                                    //   child: Text("검색"),
+                                    // ),
+                                    alignLabelWithHint: true,
+                                    counterText:'',
                                   contentPadding: EdgeInsets.all(3)
 
                                 )
@@ -84,7 +95,37 @@ class _Home3State extends State<Home3> {
                               icon: Icon(Icons.search),
                               color: Colors.black,
                               iconSize: 30.0,
-                              onPressed: () {},
+                              onPressed: () {
+
+                                searchTxt=searchController.text.replaceAll(' ', '');
+                                searchTxt=searchTxt.replaceAll(',', '');
+                                FocusManager.instance.primaryFocus?.unfocus();
+
+                                if(searchTxt==''){
+                                  lottoToast('검색어를 입력해주세요.\n공백과 ,는 제외됩니다.');
+
+                                }
+                                else {
+                                  searchResult='';
+                                  if (searchTxt != '')
+                                    for (var kk in lottoDream.keys)
+                                      if ((lottoDream[kk].toString()).contains(
+                                          searchTxt))
+                                        searchResult = searchResult + kk + '번,';
+
+
+                                setState(() {
+
+                                  if(searchTxt!='')
+                                  lottoToast('"'+searchTxt+'" 조회 완료');
+
+                                  if(searchResult=='')
+                                    searchResult='검색결과가 없습니다.';
+
+                                });
+                                } //else
+
+                              },
                             ),
                           ),
                         ],
@@ -125,12 +166,37 @@ class _Home3State extends State<Home3> {
                   Column(
                     children: [
 
+                      if(searchResult!='')  //검색결과가 있으면 표시
+                        Center(
+                          child: Column(
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container( alignment : Alignment.topLeft,
+                                    child:Text('검색결과 : ', style: TextStyle(fontFamily: 'sandol', fontSize: font_Size, fontWeight: FontWeight.bold,  ),),),
+
+                                  Flexible(
+                                    child: Container( alignment : Alignment.centerLeft,
+                                      child:Text(searchResult, style: TextStyle(fontFamily: 'sandol', fontSize: font_Size-3, fontWeight: FontWeight.bold, color: Colors.deepOrange ),),),
+                                  ),
+                                ],
+                              ),
+                          SizedBox(height: 10,),
+
+                          SizedBox(
+                            child: Text('※ 검색결과는 해당번호의 상징에 붉은색으로 표시 되었음', style: TextStyle(fontFamily: 'sandol', fontSize: font_Size-3, fontWeight: FontWeight.bold, color: Colors.blue),),
+                          ),
+                            ],
+                          ),
+
+                        ),
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Container(width: disWidthSize*0.15, height:conHeight, alignment : Alignment.center,
+                          Container(width: disWidthSize*0.15, height:conHeight, alignment : Alignment.centerLeft,
                             child:Text('번  호', style: TextStyle(fontFamily: 'sandol', fontSize: font_Size, fontWeight: FontWeight.bold,  ),),),
 
 
@@ -199,21 +265,26 @@ class _Home3State extends State<Home3> {
          crossAxisAlignment: CrossAxisAlignment.center,
          children: [
            Container(
+             width: disWidthSize*0.15,
+             alignment: Alignment.centerLeft,
+             child: Container(
 
-             width: 40,
-             height: 40,
-             decoration: BoxDecoration(
-               border: Border.all(width: 1),
-               color:  bgColore,
-               shape: BoxShape.circle,
-             ),
-             child:
-             Center(child: Text(numK.toString(), style: TextStyle(fontFamily: 'sandol', fontSize: font_Size, fontWeight: FontWeight.bold, color: Colors.white  ),)),
+               width: 40,
+               height: 40,
+               decoration: BoxDecoration(
+                 border: Border.all(width: 1),
+                 color:  bgColore,
+                 shape: BoxShape.circle,
+               ),
+               child:
+               Center(child: Text(numK.toString(), style: TextStyle(fontFamily: 'sandol', fontSize: font_Size, fontWeight: FontWeight.bold, color: Colors.white  ),)),
+             ),//원그리기
            ),
 
-           Container(width:disWidthSize*0.7,  alignment : Alignment.centerLeft,
-               child: Text(lottoDream[numK],
-                 style: TextStyle(fontFamily: 'sandol', fontSize: font_Size*0.8, ),)),
+          searchDream(lottoDream[numK], context),
+
+
+
          ],
        ),
        SizedBox(height: 10,),
@@ -225,3 +296,85 @@ class _Home3State extends State<Home3> {
   }
 }
 
+searchDream(String sdream, BuildContext context) {
+
+  if(searchTxt=='') {
+    return Container(width: disWidthSize * 0.7, alignment: Alignment.centerLeft,
+        child: Text(sdream,
+          style: TextStyle(fontFamily: 'sandol', fontSize: font_Size * 0.8,),)
+    );
+  }
+
+  else {
+    // return Container(width: disWidthSize * 0.7, alignment: Alignment.centerLeft,
+    //     child: Text(sdream,
+    //       style: TextStyle(fontFamily: 'sandol', fontSize: font_Size * 0.8,),)
+    // );
+
+
+      final String myString = sdream;
+
+      final wordToStyle = searchTxt;
+      final wordStyle = TextStyle(color: Colors.red);
+      final leftOverStyle = Theme
+          .of(context)
+          .textTheme
+          .bodyText1
+          ?.copyWith(fontSize: font_Size*0.8,fontFamily: 'sandol',);
+
+      final spans = _getSpans(myString, wordToStyle, wordStyle);
+
+      return Flexible(
+        child: Container(
+          width: disWidthSize * 0.7, alignment: Alignment.centerLeft,
+          child: RichText(
+            //overflow: TextOverflow.ellipsis,
+            text: TextSpan(
+              style: leftOverStyle,
+              children: spans,
+            ),
+          ),
+        ),
+      );
+
+  }
+}
+
+
+List<TextSpan> _getSpans(String text, String matchWord, TextStyle style) {
+
+  List<TextSpan> spans = [];
+  int spanBoundary = 0;
+
+  do {
+
+    // 전체 String 에서 키워드 검색
+    final startIndex = text.indexOf(matchWord, spanBoundary);
+
+    // 전체 String 에서 해당 키워드가 더 이상 없을때 마지막 KeyWord부터 끝까지의 TextSpan 추가
+    if (startIndex == -1) {
+      spans.add(TextSpan(text: text.substring(spanBoundary)));
+      return spans;
+    }
+
+    // 전체 String 사이에서 발견한 키워드들 사이의 text에 대한 textSpan 추가
+    if (startIndex > spanBoundary) {
+      //print(text.substring(spanBoundary, startIndex));
+      spans.add(TextSpan(text: text.substring(spanBoundary, startIndex)));
+    }
+
+    // 검색하고자 했던 키워드에 대한 textSpan 추가
+    final endIndex = startIndex + matchWord.length;
+    final spanText = text.substring(startIndex, endIndex);
+    spans.add(TextSpan(text: spanText, style: style));
+
+    // mark the boundary to start the next search from
+    spanBoundary = endIndex;
+
+    // continue until there are no more matches
+  }
+  //String 전체 검사
+  while (spanBoundary < text.length);
+
+  return spans;
+}
