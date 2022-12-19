@@ -1,5 +1,6 @@
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 
 class MyScore{
@@ -14,6 +15,8 @@ class MyScore{
 }
 
 int heartCount=0;
+
+
 
 
 var ii=0;

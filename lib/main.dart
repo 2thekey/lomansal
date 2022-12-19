@@ -62,7 +62,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-
+    MobileAds.instance.initialize(); //에드몹초기화
     myget();
     super.initState();
     //_controller = TextEditingController();
