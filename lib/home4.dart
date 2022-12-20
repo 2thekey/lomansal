@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home1.dart';
+import 'lottoad.dart';
 
 class Home4 extends StatefulWidget {
   const Home4({Key? key}) : super(key: key);
@@ -9,6 +9,12 @@ class Home4 extends StatefulWidget {
 }
 
 class _Home4State extends State<Home4> {
+  @override
+  void initState(){
+    showInterstitialAd();  //에드몹 전면광고테스트
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return  Container(

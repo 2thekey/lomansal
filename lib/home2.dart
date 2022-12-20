@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home1.dart';
+import 'lottoad.dart';
 import 'lottovar.dart';
 
 
@@ -11,6 +11,12 @@ class Home2 extends StatefulWidget {
 }
 
 class _Home2State extends State<Home2> {
+  @override
+  void initState(){
+    showInterstitialAd();  //에드몹 전면광고테스트
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

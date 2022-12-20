@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+
 import 'landingpage.dart';
 
 
@@ -24,7 +25,7 @@ import 'landingpage.dart';
 //   runApp(MyApp());
 // }
 
-var hiveBox;
+
 
 
 
@@ -38,11 +39,11 @@ void main()  async{
   if(hiveBox.get('heart')==null){
     hiveBox.put('heart', 10);
     heartCount=10;
-    print('최초접속');
+    //print('최초접속');
   }
   else{
     heartCount=hiveBox.get('heart');
-    print('기존접속');
+
     }
 
   runApp(MyApp());
@@ -1183,6 +1184,8 @@ void myget() async {
       ij++;
     }
   }
+
+
 }
 
 

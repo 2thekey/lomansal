@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'lottovar.dart';
+import 'lottoad.dart';
 
 
 final searchController = TextEditingController();
@@ -14,6 +15,12 @@ class Home3 extends StatefulWidget {
 }
 
 class _Home3State extends State<Home3> {
+  @override
+  void initState(){
+    showInterstitialAd();  //에드몹 전면광고테스트
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return

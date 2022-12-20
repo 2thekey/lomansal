@@ -9,6 +9,7 @@ import 'home2.dart';
 import 'home3.dart';
 import 'home4.dart';
 import 'package:lomansal/lottovar.dart';
+import 'lottoad.dart';
 
 
 
@@ -47,7 +48,7 @@ class _LottoHomeState extends State<LottoHome> {
     ),
 
     const BottomNavigationBarItem(
-      label: '개인정보 보호정책',
+      label: '로만살이란?',
       icon: Icon(Icons.folder_copy),
     ),
 
@@ -56,10 +57,22 @@ class _LottoHomeState extends State<LottoHome> {
 
   @override
 
-  // void initState(){
-  //   myget();
-  //   super.initState();
-  // }
+   void initState(){
+     //myget();
+    createRewardedAd();
+    createInterstitialAd();
+     super.initState();
+   }
+
+  @override
+  void dispose() {
+
+    interstitialAd?.dispose();
+    rewardedAd?.dispose();
+    rewardedInterstitialAd?.dispose();
+    super.dispose();
+  }
+
 
   Widget build(BuildContext context) {
 

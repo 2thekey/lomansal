@@ -1,125 +1,16 @@
 
 
-import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
 import 'package:lomansal/main.dart';
 
 import 'button.dart';
 import 'lottovar.dart';
-
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-
-InterstitialAd? interstitialAd;   //에드몹 전면광고 테스트 시작
-//const String testDevice = '6AAFF8BB93D774D1872C6BEAA63C4321';
-
-RewardedAd? _rewardedAd;
-int _numRewardedLoadAttempts = 0;
-const int maxFailedLoadAttempts = 3;
-
-RewardedInterstitialAd? _rewardedInterstitialAd;
-int _numRewardedInterstitialLoadAttempts = 0;
+import 'lottoad.dart';
 
 
-void _createInterstitialAd() {
-  InterstitialAd.load(
-      //adUnitId: InterstitialAd.testAdUnitId,
-      adUnitId: 'ca-app-pub-3940256099942544/1033173712',
-      request: AdRequest(),
-      adLoadCallback: InterstitialAdLoadCallback(
-        onAdLoaded: (InterstitialAd ad) {
-         // print('$ad loaded');
-          interstitialAd = ad;
-
-        },
-        onAdFailedToLoad: (LoadAdError error) {
-         // print('InterstitialAd failed to load: $error.');
-
-          interstitialAd = null;
-
-        },
-      ));
-}
-
-void _showInterstitialAd() {
-  if (interstitialAd == null) {
-    print('Warning: attempt to show interstitial before loaded.');
-    return;
-  }
-  interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
-    onAdShowedFullScreenContent: (InterstitialAd ad) =>
-        print('ad onAdShowedFullScreenContent.'),
-    onAdDismissedFullScreenContent: (InterstitialAd ad) {
-      print('$ad onAdDismissedFullScreenContent.');
-      ad.dispose();
-      _createInterstitialAd();
-    },
-    onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-      print('$ad onAdFailedToShowFullScreenContent: $error');
-      ad.dispose();
-      _createInterstitialAd();
-    },
-  );
-  interstitialAd!.show();
-  interstitialAd = null;
-}                          //에드몹 전면광고 테스트 종료
 
 
-// //리워드 광고 시작
-//
-void _createRewardedAd() {
-  RewardedAd.load(
-      adUnitId: Platform.isAndroid
-          ? 'ca-app-pub-3940256099942544/5224354917'
-          : 'ca-app-pub-3940256099942544/1712485313',
-      request: AdRequest(),
-      rewardedAdLoadCallback: RewardedAdLoadCallback(
-        onAdLoaded: (RewardedAd ad) {
-          print('$ad loaded.');
-          _rewardedAd = ad;
-          _numRewardedLoadAttempts = 0;
-        },
-        onAdFailedToLoad: (LoadAdError error) {
-          print('RewardedAd failed to load: $error');
-          _rewardedAd = null;
-          _numRewardedLoadAttempts += 1;
-          if (_numRewardedLoadAttempts < maxFailedLoadAttempts) {
-            _createRewardedAd();
-          }
-        },
-      ));
-}
-
-void _showRewardedAd() {
-  if (_rewardedAd == null) {
-    print('Warning: attempt to show rewarded before loaded.');
-    return;
-  }
-  _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
-    onAdShowedFullScreenContent: (RewardedAd ad) =>
-        print('ad onAdShowedFullScreenContent.'),
-    onAdDismissedFullScreenContent: (RewardedAd ad) {
-      print('$ad onAdDismissedFullScreenContent.');
-      ad.dispose();
-      _createRewardedAd();
-    },
-    onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
-      print('$ad onAdFailedToShowFullScreenContent: $error');
-      ad.dispose();
-      _createRewardedAd();
-    },
-  );
-
-  _rewardedAd!.setImmersiveMode(true);
-  _rewardedAd!.show(
-      onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
-        print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
-        heartCount=heartCount+6;
-        heart_count();
-      });
-  _rewardedAd = null;
-}
-//
-// //리워드 광고 종료
 
 
 
@@ -140,17 +31,13 @@ class _Home1State extends State<Home1> {
 
 
   void initState(){
-    _createRewardedAd();
-    _createInterstitialAd();
+    showInterstitialAd();  //에드몹 전면광고테스트
     super.initState();
   }
 
   @override
   void dispose() {
 
-    interstitialAd?.dispose();
-    _rewardedAd?.dispose();
-    _rewardedInterstitialAd?.dispose();
     super.dispose();
   }
 
@@ -412,7 +299,7 @@ class _Home1State extends State<Home1> {
 
                             setState(() {
                               resultSangtae=0;
-                              _showInterstitialAd();  //에드몹 전면광고테스트
+
 
                             });
 
@@ -830,6 +717,8 @@ class _Home1State extends State<Home1> {
 
 
                             heart_count();
+
+                            if(heartCount>-1)
                             lottoToast('조회 완료 ♥ x '+heartCount.toString());
 
                           }   //if-else 번호가 3개이상 선택시
@@ -1125,6 +1014,8 @@ class _Home1State extends State<Home1> {
 
 
                               heart_count();
+
+                              if(heartCount>-1)
                               lottoToast('조회 완료 ♥ x '+heartCount.toString());
                             }
 
@@ -1254,8 +1145,8 @@ class _Home1State extends State<Home1> {
 
                             resultSangtae=4;
 
-                            heart_count();
-                            _showRewardedAd();  //리워드전면광고 불러오기
+                            showRewardedAd(); //리워드 전면광고
+
                             lottoToast('조회 완료 ♥ x '+heartCount.toString());
 
                           });
@@ -2123,19 +2014,7 @@ class _Home1State extends State<Home1> {
 
 
 
-void heart_count(){
 
-  heartCount--;
-  if (heartCount==-1) {
-    heartCount = 0;
-    lottoToast('하트충전이 필요합니다.');
-  }
-
-  else {
-    hiveBox.put('heart', heartCount);
-    print(heartCount.toString());
-  }
-}
 
 // void showToast(String message) {
 //   Fluttertoast.showToast(
