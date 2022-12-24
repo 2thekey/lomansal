@@ -2,8 +2,6 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:lomansal/main.dart';
-
 import 'button.dart';
 import 'lottovar.dart';
 import 'lottoad.dart';
@@ -31,7 +29,7 @@ class _Home1State extends State<Home1> {
 
 
   void initState(){
-    showInterstitialAd();  //에드몹 전면광고테스트
+    //showInterstitialAd();  //에드몹 전면광고테스트
     super.initState();
   }
 
@@ -1147,7 +1145,7 @@ class _Home1State extends State<Home1> {
 
                             showRewardedAd(); //리워드 전면광고
 
-                            lottoToast('조회 완료 ♥ x '+heartCount.toString());
+                            //lottoToast('조회 완료 ♥ x '+heartCount.toString());
 
                           });
 
@@ -1583,7 +1581,7 @@ class _Home1State extends State<Home1> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     FittedBox(
-                      child: Text(naonTotal, style: TextStyle(fontFamily: 'sandolout', fontSize: font_Size-3, fontWeight: FontWeight.bold,  color: Colors.blueAccent), ),   //함께 출현한 수와 몇번 나왔는지 표시함
+                      child: Text(naonTotal, style: TextStyle(fontFamily: 'sandolout', fontSize: font_Size-5, fontWeight: FontWeight.bold,  color: Colors.blueAccent), ),   //함께 출현한 수와 몇번 나왔는지 표시함
                     ),
 
                   ],

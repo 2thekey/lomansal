@@ -82,7 +82,7 @@ void createRewardedAd() {
       ));
 }
 
-void showRewardedAd() {
+ showRewardedAd() {
   if (rewardedAd == null) {
     print('Warning: attempt to show rewarded before loaded.');
     return;
@@ -106,7 +106,10 @@ void showRewardedAd() {
   rewardedAd!.show(
       onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
         print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
-        heartCount=6;
+
+        if(heartCount < 6) {
+          heartCount = 6;
+        }
         heart_count();
       });
   rewardedAd = null;
