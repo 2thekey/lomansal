@@ -372,7 +372,7 @@ List<TextSpan> _getSpans(String text, String matchWord, TextStyle style) {
       spans.add(TextSpan(text: text.substring(spanBoundary, startIndex)));
     }
 
-    // 검색하고자 했던 키워드에 대한 textSpan 추가
+    // 검색하고자 했던 키워드에 대한 textSpan 추가.
     final endIndex = startIndex + matchWord.length;
     final spanText = text.substring(startIndex, endIndex);
     spans.add(TextSpan(text: spanText, style: style));
