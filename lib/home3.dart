@@ -357,7 +357,7 @@ List<TextSpan> _getSpans(String text, String matchWord, TextStyle style) {
 
   do {
 
-    // 전체 String 에서 키워드 검색..
+    // 전체 String 에서 키워드 검색...
     final startIndex = text.indexOf(matchWord, spanBoundary);
 
     // 전체 String 에서 해당 키워드가 더 이상 없을때 마지막 KeyWord부터 끝까지의 TextSpan 추가
