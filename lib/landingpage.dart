@@ -29,6 +29,12 @@ class _LandingPageState extends State<LandingPage> {
 
     super.initState();
   }
+  @override
+  void dispose() {
+
+    //print('depose');
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1110,7 +1116,7 @@ myget() async {
 
   for (var iii = last_http; iii < 2000; iii++) {
     var url = Uri.parse(
-        "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=${iii}");
+        "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=$iii");
     http.Response response = await http.get(url);
     var data = jsonDecode(response.body);
 
@@ -1123,6 +1129,8 @@ myget() async {
       num2.add(data['drwtNo5']);
       num2.add(data['drwtNo6']);
       num2.add(data['bnusNo']);
+
+
 
       // num[iii][0]=data['drwNo'];
       // num[iii][1]=data['drwtNo1'];

@@ -11,7 +11,7 @@ class Home4 extends StatefulWidget {
 class _Home4State extends State<Home4> {
   @override
   void initState(){
-   // showInterstitialAd();  //에드몹 전면광고테스트
+    showInterstitialAd();  //에드몹 전면광고테스트
     super.initState();
   }
 

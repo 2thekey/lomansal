@@ -5,9 +5,7 @@ import 'lottoad.dart';
 
 
 
-final searchController = TextEditingController();
-var searchTxt='';
-var searchResult='';
+
 
 class Home3 extends StatefulWidget {
   const Home3({Key? key}) : super(key: key);
@@ -22,6 +20,14 @@ class _Home3State extends State<Home3> {
     showInterstitialAd();  //에드몹 전면광고테스트
     super.initState();
   }
+
+  @override
+  void dispose() {
+
+    //print('depose');
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {

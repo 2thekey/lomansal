@@ -13,7 +13,7 @@ class Home2 extends StatefulWidget {
 class _Home2State extends State<Home2> {
   @override
   void initState(){
-    showInterstitialAd();  //에드몹 전면광고테스트
+    //showInterstitialAd();  //에드몹 전면광고테스트
     super.initState();
   }
 

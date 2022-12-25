@@ -176,56 +176,57 @@ class _LottoHomeState extends State<LottoHome> {
         showUnselectedLabels: true,
 
         onTap: (int index) {
-          // if (index > 0) {
-          //   showDialog( //경고창
-          //       context: context,
-          //       //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
-          //       barrierDismissible: false,
-          //       builder: (BuildContext context) {
-          //         return AlertDialog(
-          //           // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
-          //           shape: RoundedRectangleBorder(
-          //               borderRadius: BorderRadius.circular(10.0)),
-          //           //Dialog Main Title
-          //           title: Column(
-          //             children: <Widget>[
-          //               new Text("'준비중...'", style: TextStyle(
-          //                   fontFamily: 'sandol',
-          //                   fontSize: 18,
-          //                   fontWeight: FontWeight.bold,
-          //                   color: Colors.red),),
-          //             ],
-          //           ),
-          //           //
-          //           content: Column(
-          //             mainAxisSize: MainAxisSize.min,
-          //             crossAxisAlignment: CrossAxisAlignment.start,
-          //             children: <Widget>[
-          //               Text(
-          //                 "준비중입니다.", style: TextStyle(
-          //                   fontFamily: 'sandol',
-          //                   fontSize: 20,
-          //                   fontWeight: FontWeight.bold,
-          //                   color: Colors.red),
-          //               ),
-          //             ],
-          //           ),
-          //           actions: <Widget>[
-          //             new ElevatedButton(
-          //               child: new Text("확인"),
-          //               onPressed: () {
-          //                 Navigator.pop(context);
-          //               },
-          //             ),
-          //           ],
-          //         );
-          //       });
-          // } //if
-          // else {
-          //   setState(() {
-          //     _selectedIndex = index;
-          //   });
-          // } //else
+          if (index == 1) {
+            showDialog( //경고창
+                context: context,
+                //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
+                barrierDismissible: false,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)),
+                    //Dialog Main Title
+                    title: Column(
+                      children: <Widget>[
+                        new Text("'준비중...'", style: TextStyle(
+                            fontFamily: 'sandol',
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red),),
+                      ],
+                    ),
+                    //
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "제외수 찾기는 준비중입니다.", style: TextStyle(
+                            fontFamily: 'sandol',
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red),
+                        ),
+                      ],
+                    ),
+                    actions: <Widget>[
+                      new ElevatedButton(
+                        child: new Text("확인"),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+                });
+            index=0;
+          } //if
+          else {
+            setState(() {
+              _selectedIndex = index;
+            });
+          } //else
 
           setState(() {
         _selectedIndex = index;

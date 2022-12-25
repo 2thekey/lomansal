@@ -1144,6 +1144,7 @@ class _Home1State extends State<Home1> {
                             resultSangtae=4;
 
                             showRewardedAd(); //리워드 전면광고
+                            //showInterstitialAd();  //에드몹 전면광고로 대체
 
                             //lottoToast('조회 완료 ♥ x '+heartCount.toString());
 

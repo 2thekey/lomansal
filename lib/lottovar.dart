@@ -16,7 +16,9 @@ class MyScore{
 
 int heartCount=0;
 
-
+final searchController = TextEditingController();
+var searchTxt='';
+var searchResult='';
 
 
 var ii=0;
@@ -60,6 +62,7 @@ void heart_count() async{
   heartCount--;
   if (heartCount==-1) {
     showRewardedAd();  //리워드전면광고 불러오기
+    //showInterstitialAd();  //에드몹 전면광고로 리워드 광고 대체
     lottoToast('하트를 충전하고 있습니다.');
   }
 
