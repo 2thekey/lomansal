@@ -103,6 +103,57 @@ buttonCheck2(int rSangtae)
   }
 }
 
+buttonCheck5(int rSangtae)
+{
+  if(rSangtae==5)
+  {
+    return Container(
+      width: disWidthSize,
+      height: conHeight+5,
+      decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(25.0),
+          border: Border.all(
+              color: Colors.black,
+              style: BorderStyle.solid,
+              width: 2
+          )
+      ),
+      alignment: Alignment.center,
+      child:
+      FittedBox(
+        child: Text('해당번호 다음 출현한 번호 (번호 5개 이하 선택)', style: TextStyle(fontFamily: 'sandolout', fontSize: font_Size, fontWeight: FontWeight.bold,  color: Colors.white),),
+      ),
+
+
+    );
+  }
+  else
+  {
+    return Container(
+      width: disWidthSize,
+      height: conHeight+5,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(25.0),
+          border: Border.all(
+              color: Colors.black,
+              style: BorderStyle.solid,
+              width: 2
+          )
+      ),
+      alignment: Alignment.center,
+      child:
+      FittedBox(
+        child: Text('해당번호 다음 출현한 번호 (번호 5개 이하 선택)', style: TextStyle(fontFamily: 'sandolout', fontSize: font_Size, fontWeight: FontWeight.bold,  color: Colors.black),),
+      ),
+
+
+    );
+  }
+}
+
+
 buttonCheck3(int rSangtae)
 {
   if(rSangtae==3)

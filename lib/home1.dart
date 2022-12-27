@@ -770,31 +770,47 @@ class _Home1State extends State<Home1> {
                             //print(resultBunho[jj].numLotto);
                           }
 
-                          var resultA = -1;
-                          var resultB = -1;
-                          var resultC = -1;
-                          var resultD = -1;
-                          var resultE = -1;
+
 
                           switch(ii) {
                             case 0: { break;}
                             case 1:{
 
                               for (int i = 1; i < last_soonbun ; i++) {
-                                if((num[i][0]!=choice_Bunho_Int[0]) && (num[i][7]!=choice_Bunho_Int[0])) {
-                                  resultA = num[i].indexOf(choice_Bunho_Int[0]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
-                                  if(resultA!=-1){
-                                    for (int j=1; j<7; j++){
-                                      // print(num[i][j].toString());
-                                      resultBunho[num[i][j]].countLotto++; //해당번호 카운트
-                                    } //for
 
-                                    resultBunho[num[i][resultA]].countLotto--; //선택된 번호는 카운트에서 제외 해야함
-                                    naonCount++;
-                                    //print('i='+i.toString()+','+resultBunho[num[i][resultA]].toString());
+                                // resultA = num[i].indexOf(choice_Bunho_Int[0]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
 
-                                  } //if
+
+                                if ((num[i][1]==choice_Bunho_Int[0]) || (num[i][2]==choice_Bunho_Int[0])||
+                                    (num[i][3]==choice_Bunho_Int[0]) || (num[i][4]==choice_Bunho_Int[0])||
+                                    (num[i][5]==choice_Bunho_Int[0]) || (num[i][6]==choice_Bunho_Int[0])) {
+
+                                  //print(i.toString());
+
+                                  for (int j = 1; j < 7; j++) {
+                                    // print(num[i][j].toString());
+                                    //if((num[i][0]!=choice_Bunho_Int[0]) && (num[i][7]!=choice_Bunho_Int[0])) {
+                                    resultBunho[num[i][j]]
+                                        .countLotto++; //해당번호 카운트
+                                    //print( resultBunho[num[i][j]].toString());
+
+                                    //} //if
+
+                                  } //for
+
+                                  resultBunho[choice_Bunho_Int[0]]
+                                      .countLotto--; //선택된 번호는 카운트에서 제외 해야함
+                                  naonCount++;
+
+                                  //print( resultBunho[choice_Bunho_Int[0]].toString());
+
+
+                                  //print('i='+i.toString()+','+resultBunho[num[i][resultA]].toString());
+
                                 } //if
+
+
+
                               } //for
 
                               naonTotal=choice_Bunho_Int[0].toString()+'번은 지금까지 '+naonCount.toString()+'번 출현했습니다.';
@@ -808,56 +824,84 @@ class _Home1State extends State<Home1> {
 
                             case 2:{
                               for (int i = 1; i < last_soonbun ; i++) {
-                                if((num[i][0]!=choice_Bunho_Int[0]) && (num[i][7]!=choice_Bunho_Int[0]) &&
-                                    (num[i][0]!=choice_Bunho_Int[1]) && (num[i][7]!=choice_Bunho_Int[1])) {
-                                  resultA = num[i].indexOf(choice_Bunho_Int[0]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
-                                  resultB = num[i].indexOf(choice_Bunho_Int[1]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
-                                  if(resultA!=-1 && resultB!=-1){
-                                    for (int j=1; j<7; j++){
-                                      // print(num[i][j].toString());
-                                      resultBunho[num[i][j]].countLotto++; //해당번호 카운트
-                                    } //for
 
-                                    resultBunho[num[i][resultA]].countLotto--; //선택된 번호는 카운트에서 제외 해야함
-                                    resultBunho[num[i][resultB]].countLotto--; //선택된 번호는 카운트에서 제외 해야함
-                                    naonCount++;
+
+                                // if((num[i][0]!=choice_Bunho_Int[0]) && (num[i][7]!=choice_Bunho_Int[0]) &&
+                                //     (num[i][0]!=choice_Bunho_Int[1]) && (num[i][7]!=choice_Bunho_Int[1])) {
+                                //   resultA = num[i].indexOf(choice_Bunho_Int[0]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
+                                //   resultB = num[i].indexOf(choice_Bunho_Int[1]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
+                                //   if(resultA!=-1 && resultB!=-1){
+
+                                if (((num[i][1]==choice_Bunho_Int[0]) || (num[i][2]==choice_Bunho_Int[0])||
+                                    (num[i][3]==choice_Bunho_Int[0]) || (num[i][4]==choice_Bunho_Int[0])||
+                                    (num[i][5]==choice_Bunho_Int[0]) || (num[i][6]==choice_Bunho_Int[0])) &&
+
+                                    ((num[i][1]==choice_Bunho_Int[1]) || (num[i][2]==choice_Bunho_Int[1])||
+                                        (num[i][3]==choice_Bunho_Int[1]) || (num[i][4]==choice_Bunho_Int[1])||
+                                        (num[i][5]==choice_Bunho_Int[1]) || (num[i][6]==choice_Bunho_Int[1]))
+                                ) { //첫번째 if
+
+                                  //print(i.toString());
+
+                                  for (int j = 1; j < 7; j++) {
+                                    // print(num[i][j].toString());
+                                    resultBunho[num[i][j]]
+                                        .countLotto++; //해당번호 카운트
+                                  } //for
+
+                                  resultBunho[choice_Bunho_Int[0]]
+                                      .countLotto--; //선택된 번호는 카운트에서 제외 해야함
+                                  resultBunho[choice_Bunho_Int[1]]
+                                      .countLotto--; //선택된 번호는 카운트에서 제외 해야함
+                                  naonCount++;
+                                } //첫번째 if
+
                                     //print('i='+i.toString()+','+resultBunho[num[i][resultA]].toString());
 
-                                  } //if
-                                } //if
+                                //   } //if
+                                // } //if
+
+
                               } //for
 
                               naonTotal=choice_Bunho_Int[0].toString()+','+ choice_Bunho_Int[1].toString()+'번은 지금까지 '+naonCount.toString()+'번 함께 출현했습니다.';
 
                               resultBunho.sort((b, a) => a.countLotto.compareTo(b.countLotto));
                               // print(resultBunho);
-                              resultBunho.removeWhere((item) => item.countLotto==0);
+                              resultBunho.removeWhere((item) => item.numLotto==0);
                               // print(resultBunho);
                               break;
                             }
 
                             case 3:{
                               for (int i = 1; i < last_soonbun ; i++) {
-                                if((num[i][0]!=choice_Bunho_Int[0]) && (num[i][7]!=choice_Bunho_Int[0]) &&
-                                    (num[i][0]!=choice_Bunho_Int[1]) && (num[i][7]!=choice_Bunho_Int[1]) &&
-                                    (num[i][0]!=choice_Bunho_Int[2]) && (num[i][7]!=choice_Bunho_Int[2]) ) {
-                                  resultA = num[i].indexOf(choice_Bunho_Int[0]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
-                                  resultB = num[i].indexOf(choice_Bunho_Int[1]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
-                                  resultC = num[i].indexOf(choice_Bunho_Int[2]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
-                                  if(resultA!=-1 && resultB!=-1 && resultC!=-1){
-                                    for (int j=1; j<7; j++){
-                                      // print(num[i][j].toString());
-                                      resultBunho[num[i][j]].countLotto++; //해당번호 카운트
-                                    } //for
+                                if (((num[i][1]==choice_Bunho_Int[0]) || (num[i][2]==choice_Bunho_Int[0])||
+                                    (num[i][3]==choice_Bunho_Int[0]) || (num[i][4]==choice_Bunho_Int[0])||
+                                    (num[i][5]==choice_Bunho_Int[0]) || (num[i][6]==choice_Bunho_Int[0])) &&
 
-                                    resultBunho[num[i][resultA]].countLotto--; //선택된 번호는 카운트에서 제외 해야함
-                                    resultBunho[num[i][resultB]].countLotto--; //선택된 번호는 카운트에서 제외 해야함
-                                    resultBunho[num[i][resultC]].countLotto--; //선택된 번호는 카운트에서 제외 해야함
-                                    naonCount++;
-                                    //print('i='+i.toString()+','+resultBunho[num[i][resultA]].toString());
+                                    ((num[i][1]==choice_Bunho_Int[1]) || (num[i][2]==choice_Bunho_Int[1])||
+                                        (num[i][3]==choice_Bunho_Int[1]) || (num[i][4]==choice_Bunho_Int[1])||
+                                        (num[i][5]==choice_Bunho_Int[1]) || (num[i][6]==choice_Bunho_Int[1])) &&
 
-                                  } //if
-                                } //if
+                                    ((num[i][1]==choice_Bunho_Int[2]) || (num[i][2]==choice_Bunho_Int[2])||
+                                        (num[i][3]==choice_Bunho_Int[2]) || (num[i][4]==choice_Bunho_Int[2])||
+                                        (num[i][5]==choice_Bunho_Int[2]) || (num[i][6]==choice_Bunho_Int[2]))
+
+                                ) { //첫번째 if
+
+
+                                  for (int j = 1; j < 7; j++) {
+                                    // print(num[i][j].toString());
+                                    resultBunho[num[i][j]].countLotto++; //해당번호 카운트
+                                  } //for
+
+                                  resultBunho[choice_Bunho_Int[0]].countLotto--; //선택된 번호는 카운트에서 제외 해야함
+                                  resultBunho[choice_Bunho_Int[1]].countLotto--; //선택된 번호는 카운트에서 제외 해야함
+                                  resultBunho[choice_Bunho_Int[2]].countLotto--; //선택된 번호는 카운트에서 제외 해야함
+                                  naonCount++;
+                                  //print('i='+i.toString()+','+resultBunho[num[i][resultA]].toString());
+                                }
+
                               } //for
 
                               naonTotal=
@@ -868,36 +912,48 @@ class _Home1State extends State<Home1> {
 
                               resultBunho.sort((b, a) => a.countLotto.compareTo(b.countLotto));
                               // print(resultBunho);
-                              resultBunho.removeWhere((item) => item.countLotto==0);
+                              resultBunho.removeWhere((item) => item.numLotto==0);
                               // print(resultBunho);
                               break;
                             }//case 3
 
                             case 4:{
                               for (int i = 1; i < last_soonbun ; i++) {
-                                if((num[i][0]!=choice_Bunho_Int[0]) && (num[i][7]!=choice_Bunho_Int[0]) &&
-                                    (num[i][0]!=choice_Bunho_Int[1]) && (num[i][7]!=choice_Bunho_Int[1]) &&
-                                    (num[i][0]!=choice_Bunho_Int[2]) && (num[i][7]!=choice_Bunho_Int[2]) &&
-                                    (num[i][0]!=choice_Bunho_Int[3]) && (num[i][7]!=choice_Bunho_Int[3])) {
-                                  resultA = num[i].indexOf(choice_Bunho_Int[0]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
-                                  resultB = num[i].indexOf(choice_Bunho_Int[1]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
-                                  resultC = num[i].indexOf(choice_Bunho_Int[2]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
-                                  resultD = num[i].indexOf(choice_Bunho_Int[3]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
-                                  if(resultA!=-1 && resultB!=-1 && resultC!=-1 && resultD!=-1 ){
-                                    for (int j=1; j<7; j++){
-                                      // print(num[i][j].toString());
-                                      resultBunho[num[i][j]].countLotto++; //해당번호 카운트
-                                    } //for
+                                if (((num[i][1]==choice_Bunho_Int[0]) || (num[i][2]==choice_Bunho_Int[0])||
+                                    (num[i][3]==choice_Bunho_Int[0]) || (num[i][4]==choice_Bunho_Int[0])||
+                                    (num[i][5]==choice_Bunho_Int[0]) || (num[i][6]==choice_Bunho_Int[0])) &&
 
-                                    resultBunho[num[i][resultA]].countLotto--; //선택된 번호는 카운트에서 제외 해야함
-                                    resultBunho[num[i][resultB]].countLotto--; //선택된 번호는 카운트에서 제외 해야함
-                                    resultBunho[num[i][resultC]].countLotto--; //선택된 번호는 카운트에서 제외 해야함
-                                    resultBunho[num[i][resultD]].countLotto--; //선택된 번호는 카운트에서 제외 해야함
-                                    naonCount++;
-                                    //print('i='+i.toString()+','+resultBunho[num[i][resultA]].toString());
+                                    ((num[i][1]==choice_Bunho_Int[1]) || (num[i][2]==choice_Bunho_Int[1])||
+                                        (num[i][3]==choice_Bunho_Int[1]) || (num[i][4]==choice_Bunho_Int[1])||
+                                        (num[i][5]==choice_Bunho_Int[1]) || (num[i][6]==choice_Bunho_Int[1])) &&
 
-                                  } //if
-                                } //if
+                                    ((num[i][1]==choice_Bunho_Int[2]) || (num[i][2]==choice_Bunho_Int[2])||
+                                        (num[i][3]==choice_Bunho_Int[2]) || (num[i][4]==choice_Bunho_Int[2])||
+                                        (num[i][5]==choice_Bunho_Int[2]) || (num[i][6]==choice_Bunho_Int[2])) &&
+
+                                    ((num[i][1]==choice_Bunho_Int[3]) || (num[i][2]==choice_Bunho_Int[3])||
+                                        (num[i][3]==choice_Bunho_Int[3]) || (num[i][4]==choice_Bunho_Int[3])||
+                                        (num[i][5]==choice_Bunho_Int[3]) || (num[i][6]==choice_Bunho_Int[3]))
+
+                                ) { //첫번째 if
+                                  for (int j = 1; j < 7; j++) {
+                                    // print(num[i][j].toString());
+                                    resultBunho[num[i][j]]
+                                        .countLotto++; //해당번호 카운트
+                                  } //for
+
+                                  resultBunho[choice_Bunho_Int[0]]
+                                      .countLotto--; //선택된 번호는 카운트에서 제외 해야함
+                                  resultBunho[choice_Bunho_Int[1]]
+                                      .countLotto--; //선택된 번호는 카운트에서 제외 해야함
+                                  resultBunho[choice_Bunho_Int[2]]
+                                      .countLotto--; //선택된 번호는 카운트에서 제외 해야함
+                                  resultBunho[choice_Bunho_Int[3]]
+                                      .countLotto--; //선택된 번호는 카운트에서 제외 해야함
+                                  naonCount++;
+                                  //print('i='+i.toString()+','+resultBunho[num[i][resultA]].toString());
+
+                                }//if
                               } //for
 
                               naonTotal=
@@ -909,40 +965,56 @@ class _Home1State extends State<Home1> {
 
                               resultBunho.sort((b, a) => a.countLotto.compareTo(b.countLotto));
                               // print(resultBunho);
-                              resultBunho.removeWhere((item) => item.countLotto==0);
+                              resultBunho.removeWhere((item) => item.numLotto==0);
                               // print(resultBunho);
                               break;
                             }//case 4
 
                             case 5:{
                               for (int i = 1; i < last_soonbun ; i++) {
-                                if((num[i][0]!=choice_Bunho_Int[0]) && (num[i][7]!=choice_Bunho_Int[0]) &&
-                                    (num[i][0]!=choice_Bunho_Int[1]) && (num[i][7]!=choice_Bunho_Int[1]) &&
-                                    (num[i][0]!=choice_Bunho_Int[2]) && (num[i][7]!=choice_Bunho_Int[2]) &&
-                                    (num[i][0]!=choice_Bunho_Int[3]) && (num[i][7]!=choice_Bunho_Int[3]) &&
-                                    (num[i][0]!=choice_Bunho_Int[4]) && (num[i][7]!=choice_Bunho_Int[4])) {
-                                  resultA = num[i].indexOf(choice_Bunho_Int[0]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
-                                  resultB = num[i].indexOf(choice_Bunho_Int[1]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
-                                  resultC = num[i].indexOf(choice_Bunho_Int[2]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
-                                  resultD = num[i].indexOf(choice_Bunho_Int[3]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
-                                  resultE = num[i].indexOf(choice_Bunho_Int[4]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
 
-                                  if(resultA!=-1 && resultB!=-1 && resultC!=-1 && resultD!=-1 && resultE!=-1){
-                                    for (int j=1; j<7; j++){
-                                      // print(num[i][j].toString());
-                                      resultBunho[num[i][j]].countLotto++; //해당번호 카운트
-                                    } //for
+                                if (((num[i][1]==choice_Bunho_Int[0]) || (num[i][2]==choice_Bunho_Int[0])||
+                                    (num[i][3]==choice_Bunho_Int[0]) || (num[i][4]==choice_Bunho_Int[0])||
+                                    (num[i][5]==choice_Bunho_Int[0]) || (num[i][6]==choice_Bunho_Int[0])) &&
 
-                                    resultBunho[num[i][resultA]].countLotto--; //선택된 번호는 카운트에서 제외 해야함
-                                    resultBunho[num[i][resultB]].countLotto--; //선택된 번호는 카운트에서 제외 해야함
-                                    resultBunho[num[i][resultC]].countLotto--; //선택된 번호는 카운트에서 제외 해야함
-                                    resultBunho[num[i][resultD]].countLotto--; //선택된 번호는 카운트에서 제외 해야함
-                                    resultBunho[num[i][resultE]].countLotto--; //선택된 번호는 카운트에서 제외 해야함
-                                    naonCount++;
-                                    //print('i='+i.toString()+','+resultBunho[num[i][resultA]].toString());
+                                    ((num[i][1]==choice_Bunho_Int[1]) || (num[i][2]==choice_Bunho_Int[1])||
+                                        (num[i][3]==choice_Bunho_Int[1]) || (num[i][4]==choice_Bunho_Int[1])||
+                                        (num[i][5]==choice_Bunho_Int[1]) || (num[i][6]==choice_Bunho_Int[1])) &&
 
-                                  } //if
+                                    ((num[i][1]==choice_Bunho_Int[2]) || (num[i][2]==choice_Bunho_Int[2])||
+                                        (num[i][3]==choice_Bunho_Int[2]) || (num[i][4]==choice_Bunho_Int[2])||
+                                        (num[i][5]==choice_Bunho_Int[2]) || (num[i][6]==choice_Bunho_Int[2])) &&
+
+                                    ((num[i][1]==choice_Bunho_Int[3]) || (num[i][2]==choice_Bunho_Int[3])||
+                                        (num[i][3]==choice_Bunho_Int[3]) || (num[i][4]==choice_Bunho_Int[3])||
+                                        (num[i][5]==choice_Bunho_Int[3]) || (num[i][6]==choice_Bunho_Int[3]))&&
+
+                                      ((num[i][1]==choice_Bunho_Int[4]) || (num[i][2]==choice_Bunho_Int[4])||
+                                        (num[i][3]==choice_Bunho_Int[4]) || (num[i][4]==choice_Bunho_Int[4])||
+                                        (num[i][5]==choice_Bunho_Int[4]) || (num[i][6]==choice_Bunho_Int[4]))
+
+                                ) { //첫번째 if
+                                  for (int j = 1; j < 7; j++) {
+                                    // print(num[i][j].toString());
+                                    resultBunho[num[i][j]]
+                                        .countLotto++; //해당번호 카운트
+                                  } //for
+
+                                  resultBunho[choice_Bunho_Int[0]]
+                                      .countLotto--; //선택된 번호는 카운트에서 제외 해야함
+                                  resultBunho[choice_Bunho_Int[1]]
+                                      .countLotto--; //선택된 번호는 카운트에서 제외 해야함
+                                  resultBunho[choice_Bunho_Int[2]]
+                                      .countLotto--; //선택된 번호는 카운트에서 제외 해야함
+                                  resultBunho[choice_Bunho_Int[3]]
+                                      .countLotto--; //선택된 번호는 카운트에서 제외 해야함
+                                  resultBunho[choice_Bunho_Int[4]]
+                                      .countLotto--; //선택된 번호는 카운트에서 제외 해야함
+                                  naonCount++;
+                                  //print('i='+i.toString()+','+resultBunho[num[i][resultA]].toString());
                                 } //if
+
+
                               } //for
 
                               naonTotal=
@@ -955,7 +1027,7 @@ class _Home1State extends State<Home1> {
 
                               resultBunho.sort((b, a) => a.countLotto.compareTo(b.countLotto));
                               // print(resultBunho);
-                              resultBunho.removeWhere((item) => item.countLotto==0);
+                              resultBunho.removeWhere((item) => item.numLotto==0);
                               // print(resultBunho);
                               break;
                             }//case 5
@@ -1024,6 +1096,327 @@ class _Home1State extends State<Home1> {
                         buttonCheck2(resultSangtae),  // 버튼2 '함께 출현한 번호 조회
 
                       ),
+
+                      SizedBox(height: 15,),
+
+                      InkWell(   //다음주 출현한 번호 통계
+                        onTap: (){
+
+                          //다음주 출현한 번호 통계
+
+                          naonCount=0;
+                          naonTotal='';
+
+                          resultBunho.clear();
+                          for(int jj=0; jj<46; jj++) {
+                            // resultBunho[jj].numLotto = jj;
+                            // resultBunho[jj].countLotto=0;
+                            resultBunho.add(MyScore(jj, 0));
+                            //print(resultBunho[jj].numLotto);
+                          }
+
+                          switch(ii) {
+                            case 0: { break;}
+                            case 1:{
+
+                              for (int i = 1; i < last_soonbun ; i++) {
+
+                                // resultA = num[i].indexOf(choice_Bunho_Int[0]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
+
+
+                                if ((num[i][1]==choice_Bunho_Int[0]) || (num[i][2]==choice_Bunho_Int[0])||
+                                    (num[i][3]==choice_Bunho_Int[0]) || (num[i][4]==choice_Bunho_Int[0])||
+                                    (num[i][5]==choice_Bunho_Int[0]) || (num[i][6]==choice_Bunho_Int[0])) {
+
+                                  //print(i.toString());
+
+                                  for (int j = 1; j < 7; j++) {
+                                    // print(num[i][j].toString());
+                                    //if((num[i][0]!=choice_Bunho_Int[0]) && (num[i][7]!=choice_Bunho_Int[0])) {
+                                    resultBunho[num[i+1][j]]
+                                        .countLotto++; //해당번호 카운트
+                                    //print( resultBunho[num[i][j]].toString());
+
+                                    //} //if
+
+                                  } //for
+
+
+                                  naonCount++;
+
+                                  //print( resultBunho[choice_Bunho_Int[0]].toString());
+
+
+                                  //print('i='+i.toString()+','+resultBunho[num[i][resultA]].toString());
+
+                                } //if
+
+
+
+                              } //for
+
+                              naonTotal=choice_Bunho_Int[0].toString()+'번은 지금까지 '+naonCount.toString()+'번 출현했습니다.';
+
+                              resultBunho.sort((b, a) => a.countLotto.compareTo(b.countLotto));
+                              // print(resultBunho);
+                              resultBunho.removeWhere((item) => item.countLotto==0);
+                              // print(resultBunho);
+                              break;
+                            } //case 1
+
+                            case 2:{
+                              for (int i = 1; i < last_soonbun ; i++) {
+
+
+                                // if((num[i][0]!=choice_Bunho_Int[0]) && (num[i][7]!=choice_Bunho_Int[0]) &&
+                                //     (num[i][0]!=choice_Bunho_Int[1]) && (num[i][7]!=choice_Bunho_Int[1])) {
+                                //   resultA = num[i].indexOf(choice_Bunho_Int[0]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
+                                //   resultB = num[i].indexOf(choice_Bunho_Int[1]); //1회차부터 해당번호가 존재하는지 확인 //없으면 -1 반환
+                                //   if(resultA!=-1 && resultB!=-1){
+
+                                if (((num[i][1]==choice_Bunho_Int[0]) || (num[i][2]==choice_Bunho_Int[0])||
+                                    (num[i][3]==choice_Bunho_Int[0]) || (num[i][4]==choice_Bunho_Int[0])||
+                                    (num[i][5]==choice_Bunho_Int[0]) || (num[i][6]==choice_Bunho_Int[0])) &&
+
+                                    ((num[i][1]==choice_Bunho_Int[1]) || (num[i][2]==choice_Bunho_Int[1])||
+                                        (num[i][3]==choice_Bunho_Int[1]) || (num[i][4]==choice_Bunho_Int[1])||
+                                        (num[i][5]==choice_Bunho_Int[1]) || (num[i][6]==choice_Bunho_Int[1]))
+                                ) { //첫번째 if
+
+                                  //print(i.toString());
+
+                                  for (int j = 1; j < 7; j++) {
+                                    // print(num[i][j].toString());
+                                    resultBunho[num[i+1][j]]
+                                        .countLotto++; //해당번호 카운트
+                                  } //for
+
+
+                                  naonCount++;
+                                } //첫번째 if
+
+                                //print('i='+i.toString()+','+resultBunho[num[i][resultA]].toString());
+
+                                //   } //if
+                                // } //if
+
+
+                              } //for
+
+                              naonTotal=choice_Bunho_Int[0].toString()+','+ choice_Bunho_Int[1].toString()+'번은 지금까지 '+naonCount.toString()+'번 함께 출현했습니다.';
+
+                              resultBunho.sort((b, a) => a.countLotto.compareTo(b.countLotto));
+                              // print(resultBunho);
+                              resultBunho.removeWhere((item) => item.numLotto==0);
+                              // print(resultBunho);
+                              break;
+                            }
+
+                            case 3:{
+                              for (int i = 1; i < last_soonbun ; i++) {
+                                if (((num[i][1]==choice_Bunho_Int[0]) || (num[i][2]==choice_Bunho_Int[0])||
+                                    (num[i][3]==choice_Bunho_Int[0]) || (num[i][4]==choice_Bunho_Int[0])||
+                                    (num[i][5]==choice_Bunho_Int[0]) || (num[i][6]==choice_Bunho_Int[0])) &&
+
+                                    ((num[i][1]==choice_Bunho_Int[1]) || (num[i][2]==choice_Bunho_Int[1])||
+                                        (num[i][3]==choice_Bunho_Int[1]) || (num[i][4]==choice_Bunho_Int[1])||
+                                        (num[i][5]==choice_Bunho_Int[1]) || (num[i][6]==choice_Bunho_Int[1])) &&
+
+                                    ((num[i][1]==choice_Bunho_Int[2]) || (num[i][2]==choice_Bunho_Int[2])||
+                                        (num[i][3]==choice_Bunho_Int[2]) || (num[i][4]==choice_Bunho_Int[2])||
+                                        (num[i][5]==choice_Bunho_Int[2]) || (num[i][6]==choice_Bunho_Int[2]))
+
+                                ) { //첫번째 if
+
+
+                                  for (int j = 1; j < 7; j++) {
+                                    // print(num[i][j].toString());
+                                    resultBunho[num[i+1][j]].countLotto++; //해당번호 카운트
+                                  } //for
+
+
+                                  naonCount++;
+                                  //print('i='+i.toString()+','+resultBunho[num[i][resultA]].toString());
+                                }
+
+                              } //for
+
+                              naonTotal=
+                                  choice_Bunho_Int[0].toString()+','+
+                                      choice_Bunho_Int[1].toString()+','+
+                                      choice_Bunho_Int[2].toString()+
+                                      '번은 지금까지 '+naonCount.toString()+'번 함께 출현했습니다.';
+
+                              resultBunho.sort((b, a) => a.countLotto.compareTo(b.countLotto));
+                              // print(resultBunho);
+                              resultBunho.removeWhere((item) => item.numLotto==0);
+                              // print(resultBunho);
+                              break;
+                            }//case 3
+
+                            case 4:{
+                              for (int i = 1; i < last_soonbun ; i++) {
+                                if (((num[i][1]==choice_Bunho_Int[0]) || (num[i][2]==choice_Bunho_Int[0])||
+                                    (num[i][3]==choice_Bunho_Int[0]) || (num[i][4]==choice_Bunho_Int[0])||
+                                    (num[i][5]==choice_Bunho_Int[0]) || (num[i][6]==choice_Bunho_Int[0])) &&
+
+                                    ((num[i][1]==choice_Bunho_Int[1]) || (num[i][2]==choice_Bunho_Int[1])||
+                                        (num[i][3]==choice_Bunho_Int[1]) || (num[i][4]==choice_Bunho_Int[1])||
+                                        (num[i][5]==choice_Bunho_Int[1]) || (num[i][6]==choice_Bunho_Int[1])) &&
+
+                                    ((num[i][1]==choice_Bunho_Int[2]) || (num[i][2]==choice_Bunho_Int[2])||
+                                        (num[i][3]==choice_Bunho_Int[2]) || (num[i][4]==choice_Bunho_Int[2])||
+                                        (num[i][5]==choice_Bunho_Int[2]) || (num[i][6]==choice_Bunho_Int[2])) &&
+
+                                    ((num[i][1]==choice_Bunho_Int[3]) || (num[i][2]==choice_Bunho_Int[3])||
+                                        (num[i][3]==choice_Bunho_Int[3]) || (num[i][4]==choice_Bunho_Int[3])||
+                                        (num[i][5]==choice_Bunho_Int[3]) || (num[i][6]==choice_Bunho_Int[3]))
+
+                                ) { //첫번째 if
+                                  for (int j = 1; j < 7; j++) {
+                                    // print(num[i][j].toString());
+                                    resultBunho[num[i+1][j]]
+                                        .countLotto++; //해당번호 카운트
+                                  } //for
+
+
+                                  naonCount++;
+                                  //print('i='+i.toString()+','+resultBunho[num[i][resultA]].toString());
+
+                                }//if
+                              } //for
+
+                              naonTotal=
+                                  choice_Bunho_Int[0].toString()+','+
+                                      choice_Bunho_Int[1].toString()+','+
+                                      choice_Bunho_Int[2].toString()+','+
+                                      choice_Bunho_Int[3].toString()+
+                                      '번은 지금까지 '+naonCount.toString()+'번 함께 출현했습니다.';
+
+                              resultBunho.sort((b, a) => a.countLotto.compareTo(b.countLotto));
+                              // print(resultBunho);
+                              resultBunho.removeWhere((item) => item.numLotto==0);
+                              // print(resultBunho);
+                              break;
+                            }//case 4
+
+                            case 5:{
+                              for (int i = 1; i < last_soonbun ; i++) {
+
+                                if (((num[i][1]==choice_Bunho_Int[0]) || (num[i][2]==choice_Bunho_Int[0])||
+                                    (num[i][3]==choice_Bunho_Int[0]) || (num[i][4]==choice_Bunho_Int[0])||
+                                    (num[i][5]==choice_Bunho_Int[0]) || (num[i][6]==choice_Bunho_Int[0])) &&
+
+                                    ((num[i][1]==choice_Bunho_Int[1]) || (num[i][2]==choice_Bunho_Int[1])||
+                                        (num[i][3]==choice_Bunho_Int[1]) || (num[i][4]==choice_Bunho_Int[1])||
+                                        (num[i][5]==choice_Bunho_Int[1]) || (num[i][6]==choice_Bunho_Int[1])) &&
+
+                                    ((num[i][1]==choice_Bunho_Int[2]) || (num[i][2]==choice_Bunho_Int[2])||
+                                        (num[i][3]==choice_Bunho_Int[2]) || (num[i][4]==choice_Bunho_Int[2])||
+                                        (num[i][5]==choice_Bunho_Int[2]) || (num[i][6]==choice_Bunho_Int[2])) &&
+
+                                    ((num[i][1]==choice_Bunho_Int[3]) || (num[i][2]==choice_Bunho_Int[3])||
+                                        (num[i][3]==choice_Bunho_Int[3]) || (num[i][4]==choice_Bunho_Int[3])||
+                                        (num[i][5]==choice_Bunho_Int[3]) || (num[i][6]==choice_Bunho_Int[3]))&&
+
+                                    ((num[i][1]==choice_Bunho_Int[4]) || (num[i][2]==choice_Bunho_Int[4])||
+                                        (num[i][3]==choice_Bunho_Int[4]) || (num[i][4]==choice_Bunho_Int[4])||
+                                        (num[i][5]==choice_Bunho_Int[4]) || (num[i][6]==choice_Bunho_Int[4]))
+
+                                ) { //첫번째 if
+                                  for (int j = 1; j < 7; j++) {
+                                    // print(num[i][j].toString());
+                                    resultBunho[num[i+1][j]]
+                                        .countLotto++; //해당번호 카운트
+                                  } //for
+
+
+                                  naonCount++;
+                                  //print('i='+i.toString()+','+resultBunho[num[i][resultA]].toString());
+                                } //if
+
+
+                              } //for
+
+                              naonTotal=
+                                  choice_Bunho_Int[0].toString()+','+
+                                      choice_Bunho_Int[1].toString()+','+
+                                      choice_Bunho_Int[2].toString()+','+
+                                      choice_Bunho_Int[3].toString()+','+
+                                      choice_Bunho_Int[4].toString()+
+                                      '번은 지금까지 '+naonCount.toString()+'번 함께 출현했습니다.';
+
+                              resultBunho.sort((b, a) => a.countLotto.compareTo(b.countLotto));
+                              // print(resultBunho);
+                              resultBunho.removeWhere((item) => item.numLotto==0);
+                              // print(resultBunho);
+                              break;
+                            }//case 5
+                            case 6 : { break;}
+
+                          } //switch
+
+                          setState(() {
+
+                            if(ii==0 || ii==6) {
+                              resultSangtae = 0;
+
+
+                              showDialog(   //경고창
+                                  context: context,
+                                  //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
+                                  barrierDismissible: false,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10.0)),
+                                      //Dialog Main Title
+                                      title: Column(
+                                        children: <Widget>[
+                                          new Text("'번호 선택 오류'", style: TextStyle(fontFamily: 'sandol', fontSize: 18, fontWeight: FontWeight.bold,  color: Colors.red),),
+                                        ],
+                                      ),
+                                      //
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text(
+                                            "번호를 1개 이상 5개 이하로 선택해주세요.", style: TextStyle(fontFamily: 'sandol', fontSize: 20, fontWeight: FontWeight.bold,  color: Colors.red),
+                                          ),
+                                        ],
+                                      ),
+                                      actions: <Widget>[
+                                        new ElevatedButton(
+                                          child: new Text("확인"),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  });
+
+                              //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("번호를 1개 이상 5개 이하로 선택해주세요.")));
+                            }
+                            else {
+                              resultSangtae = 5;
+
+
+                              heart_count();
+
+                              if(heartCount>-1)
+                                lottoToast('조회 완료 ♥ x '+heartCount.toString());
+                            }
+
+                          });
+
+                        },
+                        child:
+                        buttonCheck5(resultSangtae),  // 버튼5 '다음주 출현했던 번호
+
+                      ),//다음주 출현한 번호 통계
 
                       SizedBox(height: 15,),
 
@@ -1582,7 +1975,9 @@ class _Home1State extends State<Home1> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     FittedBox(
-                      child: Text(naonTotal, style: TextStyle(fontFamily: 'sandolout', fontSize: font_Size-5, fontWeight: FontWeight.bold,  color: Colors.blueAccent), ),   //함께 출현한 수와 몇번 나왔는지 표시함
+                      child: Container(
+                        child: Text(naonTotal, style: TextStyle(fontFamily: 'sandolout', fontSize: font_Size-3, fontWeight: FontWeight.bold,  color: Colors.blueAccent), ),   //함께 출현한 수와 몇번 나왔는지 표시함
+                      ),
                     ),
 
                   ],
@@ -1985,6 +2380,151 @@ class _Home1State extends State<Home1> {
 
 
       }  //case 4 지난주 당첨번호로 분석 출력
+
+      case 5: {  //해당번호 다음 출현한 번호
+        return Center( //결과값 표시 존
+
+
+          child: Container(
+            //height: 100,
+            width:disWidthSize,
+            //MediaQuery.of(context).size.width - 50,
+            color: Colors.grey[100],
+            alignment: Alignment.center,
+
+            child:
+            Column(
+
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FittedBox(
+                      child: Container(
+                        child: Text(naonTotal, style: TextStyle(fontFamily: 'sandolout', fontSize: font_Size-3, fontWeight: FontWeight.bold,  color: Colors.blueAccent), ),   //다음주 출현한 수와 몇번 나왔는지 표시함
+                      ),
+                    ),
+
+                  ],
+
+                ),
+                Divider(thickness: 2, height: 1, color: Colors.blueAccent),
+                SizedBox(height: 15,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(width: disWidthSize*0.19, height:30, alignment : Alignment.center, child:Text('번  호', style: TextStyle(fontFamily: 'sandol', fontSize: font_Size, fontWeight: FontWeight.bold,  color: Colors.black),),),
+
+                    Container(width:disWidthSize*0.35, height:30, alignment : Alignment.center, child: Text('다음주 출현횟수', style: TextStyle(fontFamily: 'sandol', fontSize: font_Size, fontWeight: FontWeight.bold,  color: Colors.black),)),
+                    Container(width:disWidthSize*0.14, height:30, alignment : Alignment.center, child: Text('확  률', style: TextStyle(fontFamily: 'sandol', fontSize: font_Size, fontWeight: FontWeight.bold,  color: Colors.black),)),
+                    Container(width:disWidthSize*0.32, height:30, alignment : Alignment.center, child: Text('선  택', style: TextStyle(fontFamily: 'sandol', fontSize: font_Size, fontWeight: FontWeight.bold,  color: Colors.black),)),
+
+                  ],
+                ),
+
+                Divider(thickness: 1, height: 1, color: Colors.black45),
+
+
+                for(int iji=0; iji<resultBunho.length; iji++)
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(width: disWidthSize*0.19, height:conHeight, alignment : Alignment.center, child:Text(resultBunho[iji].numLotto.toString(), style: TextStyle(fontFamily: 'sandolout', fontSize: font_Size, fontWeight: FontWeight.bold,  color: Colors.deepOrange),),),
+
+                          Container(width:disWidthSize*0.35, height:conHeight, alignment : Alignment.center, child: Text(resultBunho[iji].countLotto.toString(), style: TextStyle(fontFamily: 'sandol', fontSize: font_Size, fontWeight: FontWeight.bold,  color: Colors.black),)),
+                          Container(width:disWidthSize*0.14, height:conHeight, alignment : Alignment.center,
+                            child:
+                            FittedBox(
+                              child: Text(((resultBunho[iji].countLotto/naonCount)*100).toStringAsFixed(2)+'%',
+                                style: TextStyle(fontFamily: 'sandol', fontSize: font_Size, fontWeight: FontWeight.bold,  color: Colors.deepOrange),),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: (){ //함께 출현한 수 선택클릭시 동작~
+
+
+                              // setState(() {
+                              //   bbbCheck(resultBunho[iji].numLotto.toInt());
+                              //   print(resultBunho[iji].numLotto);
+                              // });
+
+                              if(ii==6 || bunhoSangtae[resultBunho[iji].numLotto]==1){
+
+                                return setState(() {
+
+                                });}
+                              bunhoSangtae[resultBunho[iji].numLotto]=1;
+                              choice_Bunho[ii]=resultBunho[iji].numLotto.toString();
+                              ii++;
+
+
+
+
+                              var mTemp=0;
+                              setState(() {
+
+                                if(ii > -1)
+                                {
+                                  for(int i=0; i< ii+mTemp; i++)
+                                  {
+                                    //var aa=choice_Bunho[i].to
+                                    choice_Bunho_Int[i]=int.parse(choice_Bunho[i]);
+                                  }
+
+                                  choice_Bunho_Int.sort();
+
+                                  for(int i=0; i< ii+mTemp; i++)
+                                  {
+                                    //var aa=choice_Bunho[i].to
+                                    if(choice_Bunho_Int[i]!=46) {
+                                      choice_Bunho[i] = choice_Bunho_Int[i].toString();
+                                    }
+                                    else
+                                    {
+                                      choice_Bunho[i]=' ';
+                                    }
+
+                                  }
+
+                                }
+
+                              });
+
+
+                            },
+                            child: Container(width:disWidthSize*0.32, height:conHeight, alignment : Alignment.center, child: Text('선  택', style: TextStyle(fontFamily: 'sandol', fontSize: font_Size, fontWeight: FontWeight.bold,  color: Colors.black),)),
+
+                          ),
+
+
+                        ],
+                      ),
+                      Divider(thickness: 1, height: 1, color: Colors.grey),
+                    ],
+                  ),
+
+
+
+                SizedBox(height: 15,),
+
+
+              ],
+
+            ),
+
+
+
+          ),
+        );
+
+
+      } //case 5 함께 출현한 수 출력해당번호 다음 출현한 번호
 
 
 
