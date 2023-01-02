@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'button.dart';
 import 'lottovar.dart';
 import 'lottoad.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 
 
@@ -1458,7 +1460,11 @@ class _Home1State extends State<Home1> {
 
 
                       InkWell(  //지난주 당첨 번호로 분석
-                        onTap: (){
+                        onTap: () async {
+
+                          //지난주 당첨번호가 있나 검색
+
+                          await checkLastweek();
 
                           all_clear();
                           for(int jj=0; jj<46; jj++) {
@@ -2549,12 +2555,6 @@ class _Home1State extends State<Home1> {
 }
 
 
-
-
-
-
-
-
 // void showToast(String message) {
 //   Fluttertoast.showToast(
 //       msg: message,
@@ -2562,3 +2562,62 @@ class _Home1State extends State<Home1> {
 //       toastLength: Toast.LENGTH_SHORT,
 //       gravity: ToastGravity.BOTTOM_LEFT);
 // }
+
+
+ checkLastweek() async{
+
+   //last_soonbun = num2[(num2.length) - 8] + 1;
+   //print(last_soonbun);
+
+   int last_last_soonbun=last_soonbun+1;
+
+   var url2 = Uri.parse(
+       "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=$last_last_soonbun");
+   http.Response response2 = await http.get(url2);
+   var data2 = jsonDecode(response2.body);
+
+
+   if(data2['drwNo'] != null) {
+     int last_http = last_soonbun;
+
+
+     for (var iii = last_http; iii < 2000; iii++) {
+       var url = Uri.parse(
+           "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=$iii");
+       http.Response response = await http.get(url);
+       var data = jsonDecode(response.body);
+
+       if (data['drwNo'] != null) {
+         // num2.add(data['drwNo']);
+         // num2.add(data['drwtNo1']);
+         // num2.add(data['drwtNo2']);
+         // num2.add(data['drwtNo3']);
+         // num2.add(data['drwtNo4']);
+         // num2.add(data['drwtNo5']);
+         // num2.add(data['drwtNo6']);
+         // num2.add(data['bnusNo']);
+
+
+         num[iii][0]=data['drwNo'];
+         num[iii][1]=data['drwtNo1'];
+         num[iii][2]=data['drwtNo2'];
+         num[iii][3]=data['drwtNo3'];
+         num[iii][4]=data['drwtNo4'];
+         num[iii][5]=data['drwtNo5'];
+         num[iii][6]=data['drwtNo6'];
+         num[iii][7]=data['bnusNo'];
+       }
+       else {
+         last_soonbun = iii;
+
+
+         break;
+       }
+     }
+   }
+
+   // else
+   //   {
+   //     lottoToast(num[last_soonbun-1].toString());
+   //   }
+}
